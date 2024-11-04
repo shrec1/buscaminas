@@ -1,0 +1,65 @@
+
+/* .board {
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid black;
+  }
+
+  .cell {
+    width: 15px;
+    height: 15px;
+    font-size: 5px;
+    cursor: pointer;
+    background-color: #858282;
+    border: 1px solid #ccc;
+  }
+  
+  .mine {
+    background-color: red;
+  }
+ 
+  
+   */
+
+
+
+  .h1{
+    text-align: center;
+  }
+   .board {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    margin-top: 30px;
+  }
+  .row {
+    display: flex;
+  }
+  .cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  .cell.revealed {
+    background-color: #f0f0f0;
+  }
+  .red {
+    color: red; /* O puedes usar background-color: red; según tus necesidades */
+}
+.flag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 20px; /* Ajusta el tamaño según sea necesario */
+}
