@@ -4,6 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
+# VERSIONES DEL PROYECTO
+
+Angular CLI: 16.2.16
+Node: 18.19.1
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding

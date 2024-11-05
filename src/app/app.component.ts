@@ -25,28 +25,9 @@ export class AppComponent {
     this.inicializarTablero();
     this.placeMines();
     this.calculateNeighborMines();
-    //this.iniciarTablero();
-    // this.recorrerTablero();
-    // this.minePlaced();
-    //this.initializeBoard();
+    
   }
-  // iniciarTablero() {
-  //   this.board = [];
-  //   for (let i = 0; i < this.SIZE; i++) {
-  //     this.board[i] = [];
-  //     for (let j = 0; j < this.SIZE; j++) {
-  //       this.board[i][j] = { isMine: 0, isRevealed: false, neighborMines: 0 };
-  //     }
-  //   }
-  //   console.log(this.board);
-  // }
-
-  // private initializeBoard() {
-  //   this.board = Array.from({ length: this.SIZE }, () =>
-  //     Array.from({ length: this.SIZE }, () => ({ isMine: false, isRevealed: false, neighborMines: 0 }))
-  //   );
-  // }
-
+  
   inicializarTablero() {
       this.board = Array.from({ length: this.SIZE }, () =>
       Array.from({ length: this.SIZE }, () => ({
@@ -84,6 +65,8 @@ export class AppComponent {
     }
   }
 
+  //Funcion que recorre las celdas adyacentes, recorre fila y columna, luego con funcion isInBounds verifica que la 
+  //celda esta dentro del limite del tablero   
    incrementNeighborCounts(row: any, col: any) {
     for (let r = row - 1; r <= row + 1; r++) {
       for (let c = col - 1; c <= col + 1; c++) {
@@ -91,6 +74,7 @@ export class AppComponent {
          {
            this.board[r][c].neighborMines++;
          }
+         //Verficacion las posiciones de las celdas que esten dentro del tablero
         // if (
         //   r >= 0 &&
         //   r < this.SIZE &&
@@ -106,8 +90,8 @@ export class AppComponent {
   public revealCell(row: number, col: number) {
     //Linea para omitir revelar si se da la condicion
     if (this.gameOver || this.board[row][col].isRevealed) return; 
-    this.board[row][col].isRevealed = true;
 
+    this.board[row][col].isRevealed = true;
     
     //Condicion para abrir area si la celda no tiene "Minas Vecinas"
     if (this.board[row][col].neighborMines === 0) {
@@ -125,12 +109,12 @@ export class AppComponent {
   
           // Verificar si la nueva posición está dentro de los límites del tablero
           if (this.isInBounds(newRow, newCol)) {
-              this.revealCell(newRow, newCol); // Llamada recursiva
+              this.revealCell(newRow, newCol); 
            
           }
           
       }
-    
+   
     }
     //Condicion si la celda revelada es mina; se cambia el estado de la variable "gameOver = true" y mensaje de alerta
     //En caso  
@@ -142,6 +126,7 @@ export class AppComponent {
        this.isGameWon = true;
        alert('FELICIDADES. HAS LIMPIADO EL TABLERO.');
     }
+    
   }
   isInBounds(row: number, col: number): boolean {
    return row >= 0 && row < this.SIZE && col >= 0 && col < this.SIZE;
@@ -155,59 +140,13 @@ placeFlag(event: MouseEvent, row: number, col: number) {
   console.log(`Clic derecho en: (${row}, ${col})`);
   const cell = this.board[row][col];
 
-  if (!cell.isRevealed) { // Solo permitir colocar bandera si la celda no está revelada
-      cell.isFlagged = false; // Alternar el estado de la bandera
+  if (!cell.isRevealed) { 
+      cell.isFlagged = !cell.isFlagged; 
   }
 }
-placeFlag2(event: MouseEvent, row: number, col: number) {
-  event.preventDefault(); // Previene el menú de contexto
-
-  console.log(`Clic derecho en: (${row}, ${col})`);
-  const cell = this.board[row][col];
-
-  if (!cell.isRevealed) {
-    this.toggleFlag(cell); // Llama a un método auxiliar
-  }
-}
-
-private toggleFlag(cell: Cell) {
-  cell.isFlagged = !cell.isFlagged; // Alterna el estado de la bandera
-}
-
    checkWinCondition() {
      return this.board.flat().every((cell) => cell.isRevealed || cell.isMine);
    }
 
-  //   inicializarTablero() {
-  //     this.board = Array.from({ length: this.rows }, () => Array(this.cols).fill(0));
-  //     console.log(this.board);
-
-  //   }
-
-  //   minePlaced(){
-  //     let minasColocadas = 0;
-
-  //     while (minasColocadas < this.mines) {
-  //       const fila = Math.floor(Math.random() * this.rows);
-  //       const columna = Math.floor(Math.random() * this.cols);
-
-  //       if (this.board[fila][columna] === 0) { // Verifica si la celda está vacía
-  //         this.board[fila][columna] = -1; // Coloca la mina
-
-  //         minasColocadas++; // Incrementa el contador de minas colocadas
-  //       }
-  //     }
-  //     console.log('Tablero después de colocar minas:', this.board);
-  //   }
-  //   isMine(row: number, col: number): boolean {
-  //     return this.board[row][col] === -1;
-  //   }
-
-  //   recorrerTablero() {
-  //     for (let i = 0; i < this.board.length; i++) { // Recorre las filas
-  //       for (let j = 0; j < this.board[i].length; j++) { // Recorre las columnas
-  //         console.log(`Celda [${i}, ${j}]: ${this.board[i][j]}`);
-  //       }}
-  //     }
-  // revealCell(row:number,col:number,){}
+  
 }
